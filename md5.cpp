@@ -10,24 +10,64 @@ extern void *pAMXFunctions;
 
 
 
-cell AMX_NATIVE_CALL MD5Hash(AMX *amx, cell *params)
+cell AMX_NATIVE_CALL MD5hash(AMX *amx, cell *params)
 {
 	MD5 md5;
-	char* dest;
+	char* src;
 	cell* addr;
 
-    	amx_StrParam(amx, params[2], dest);
 	amx_GetAddr(amx, params[1], &addr);
+    	amx_StrParam(amx, params[2], src);
 
-	if(dest != NULL) 
+	if(src != NULL) 
 	{
-		amx_SetString(addr, md5.digestString(dest), 0, 0, params[3]);
+		amx_SetString(addr, md5.digestString(src), 0, 0, params[3]);
 	}
     	else 
 	{
 		amx_SetString(addr, md5.digestString(""), 0, 0, params[3]);
+		
+		return 0;
 	}
 
+	return 32;
+}
+
+
+
+cell AMX_NATIVE_CALL MD5hmac(AMX *amx, cell *params)
+{
+	MD5 md5;
+	char* src;
+	char* hmac;
+	cell* addr;
+	
+	amx_GetAddr(amx, params[1], &addr);
+	amx_StrParam(amx, params[2], src);
+	amx_StrParam(amx, params[3], hmac);
+	
+	if(hmac == NULL)
+		return 0;
+		
+	std::string conv;
+	
+	conv.assign(md5.digestString(hmac));
+		
+	if(src != NULL)
+	{
+		conv.insert(conv.length(), md5.digestString(src));
+		
+		amx_SetString(addr, md5.digestString(conv.c_str()), 0, 0, params[4]);
+	}
+	else
+	{
+		conv.inster(conv.length(), md5.digestString(""));
+		
+		amx_SetString(addr, md5.digestString(conv.c_str()), 0, 0, params[4]);
+		
+		return 0;
+	}
+	
 	return 32;
 }
 
@@ -61,7 +101,9 @@ PLUGIN_EXPORT void PLUGIN_CALL Unload()
 
 AMX_NATIVE_INFO PluginNatives[] =
 {
-    {"md5", MD5Hash}
+    {"md5", MD5hash},
+    {"md5_hmac", MD5hmac},
+    {NULL, NULL}
 };
 
 
@@ -74,8 +116,6 @@ PLUGIN_EXPORT int PLUGIN_CALL AmxLoad(AMX *amx)
 
 
 
-//This function is called when every an AMX instance is unloaded. If you store AMX instances, make sure you remove them. Otherwise you'll have instances to 
-//non-existing gamemodes/filterscripts.
 PLUGIN_EXPORT int PLUGIN_CALL AmxUnload(AMX *amx) 
 {
     return AMX_ERR_NONE;
