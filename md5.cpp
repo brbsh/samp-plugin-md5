@@ -61,7 +61,7 @@ cell AMX_NATIVE_CALL MD5hmac(AMX *amx, cell *params)
 	}
 	else
 	{
-		conv.inster(conv.length(), md5.digestString(""));
+		conv.insert(conv.length(), md5.digestString(""));
 		
 		amx_SetString(addr, md5.digestString(conv.c_str()), 0, 0, params[4]);
 		
