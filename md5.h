@@ -1,5 +1,7 @@
 #pragma once
 
-#include "SDK\amx\amx.h"
-#include "SDK\plugincommon.h"
+#include "sdk/amx/amx.h"
+#include "sdk/plugincommon.h"
 #include "md5_base.h"
+
+#include <string>

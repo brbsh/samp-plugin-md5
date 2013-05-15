@@ -1,0 +1,7 @@
+LIBRARY	"md5"
+EXPORTS
+	Supports
+	Load
+	Unload
+	AmxLoad
+	AmxUnload

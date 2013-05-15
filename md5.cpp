@@ -1,5 +1,4 @@
 #include "md5.h"
-#include <string>
 
 
 typedef void (*logprintf_t)(char* format, ...);
@@ -57,17 +56,36 @@ cell AMX_NATIVE_CALL MD5hmac(AMX *amx, cell *params)
 	{
 		conv.insert(conv.length(), md5.digestString(src));
 		
-		amx_SetString(addr, md5.digestString(conv.c_str()), 0, 0, params[4]);
+		amx_SetString(addr, md5.digestString((char*)conv.c_str()), 0, 0, params[4]);
 	}
 	else
 	{
 		conv.insert(conv.length(), md5.digestString(""));
 		
-		amx_SetString(addr, md5.digestString(conv.c_str()), 0, 0, params[4]);
+		amx_SetString(addr, md5.digestString((char*)conv.c_str()), 0, 0, params[4]);
 		
 		return 0;
 	}
 	
+	return 32;
+}
+
+
+
+cell AMX_NATIVE_CALL MD5file(AMX *amx, cell *params)
+{
+	MD5 md5;
+	char* file;
+	cell* addr;
+	
+	amx_GetAddr(amx, params[1], &addr);
+	amx_StrParam(amx, params[2], file);
+	
+	if(file == NULL)
+		return 0;
+
+	amx_SetString(addr, md5.digestFile(file), 0, 0, params[3]);
+
 	return 32;
 }
 
@@ -103,6 +121,7 @@ AMX_NATIVE_INFO PluginNatives[] =
 {
     {"md5", MD5hash},
     {"md5_hmac", MD5hmac},
+	{"md5_file", MD5file},
     {NULL, NULL}
 };
 
