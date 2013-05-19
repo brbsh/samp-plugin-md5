@@ -16,7 +16,7 @@ cell AMX_NATIVE_CALL MD5hash(AMX *amx, cell *params)
 	cell* addr;
 
 	amx_GetAddr(amx, params[1], &addr);
-    	amx_StrParam(amx, params[2], src);
+    amx_StrParam(amx, params[2], src);
 
 	if(src != NULL) 
 	{
