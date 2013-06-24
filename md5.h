@@ -1,7 +1,20 @@
 #pragma once
 
-#include "sdk/amx/amx.h"
-#include "sdk/plugincommon.h"
-#include "md5_base.h"
+
 
 #include <string>
+#include <string.h>
+
+#include "SDK/plugin.h"
+
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include "md5_base.h"
+#include "natives.h"
+
+
+
+
+
+typedef void (*logprintf_t)(char *format, ...);
