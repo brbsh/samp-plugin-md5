@@ -2,6 +2,7 @@
 
 
 
+#include <alloca.h>
 #include <string>
 #include <string.h>
 
