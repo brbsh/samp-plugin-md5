@@ -1,18 +1,27 @@
 #pragma once
+#pragma warning(disable:4996)
 
 
+#ifdef WIN32
+	#include <malloc.h>
+#else
+	#include <alloca.h>
+#endif
 
-#include <alloca.h>
 #include <string>
 #include <string.h>
 
 #include "SDK/plugin.h"
-
-
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "md5_base.h"
+
 #include "natives.h"
+
+
+
+
+
+#define arguments(n) \
+	(params[0] == (n << 2))
 
 
 
