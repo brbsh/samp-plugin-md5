@@ -9,6 +9,8 @@
 
 
 logprintf_t logprintf;
+
+
 extern void *pAMXFunctions;
 
 
@@ -27,7 +29,7 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
     pAMXFunctions = ppData[PLUGIN_DATA_AMX_EXPORTS];
     logprintf = (logprintf_t) ppData[PLUGIN_DATA_LOGPRINTF];
 
-    logprintf("  MD5 plugin loaded");
+    logprintf("  MD5 plugin v1.1.1 loaded");
 
     return true;
 }
@@ -36,7 +38,7 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
 
 PLUGIN_EXPORT void PLUGIN_CALL Unload()
 {
-    logprintf("  MD5 plugin unloaded");
+    logprintf("  MD5 plugin v1.1.1 unloaded");
 }
 
 

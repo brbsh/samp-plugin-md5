@@ -2,17 +2,15 @@
 #pragma warning(disable:4996)
 
 
-#ifdef WIN32
-	#include <malloc.h>
-#else
+#ifdef LINUX
 	#include <alloca.h>
 #endif
 
 #include <string>
-#include <string.h>
 
-#include "SDK/plugin.h"
+
 #include "md5_base.h"
+#include "SDK/plugin.h"
 
 #include "natives.h"
 

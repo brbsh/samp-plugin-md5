@@ -37,7 +37,7 @@ cell AMX_NATIVE_CALL amxNatives::MD5_hash(AMX *amx, cell *params)
 
 	if(params[3] < 33)
 	{
-		logprintf("\nMD5 warning: string size must be less than 32 cells\n");
+		logprintf("\nMD5 warning: string size must be greater than 32 cells\n");
 
 		return NULL;
 	}
@@ -76,7 +76,7 @@ cell AMX_NATIVE_CALL amxNatives::MD5_file(AMX *amx, cell *params)
 
 	if(params[3] < 33)
 	{
-		logprintf("\nMD5 warning: string size must be less than 32 cells\n");
+		logprintf("\nMD5 warning: string size must be greater than 32 cells\n");
 
 		return NULL;
 	}
@@ -144,13 +144,12 @@ cell AMX_NATIVE_CALL amxNatives::MD5_hmac(AMX *amx, cell *params)
 		return NULL;
 	}
 		
-	char *buffer = (char *)malloc(33 * 2);
+	char buffer[66];
 	
 	strcpy(buffer, md5.digestString(src));
 	strcat(buffer, md5.digestString(hmac));
 		
 	amx_SetString(addr, md5.digestString(buffer), NULL, NULL, params[4]);
-	free(buffer);
 
 	return 32;
 }
