@@ -29,16 +29,16 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
     pAMXFunctions = ppData[PLUGIN_DATA_AMX_EXPORTS];
     logprintf = (logprintf_t) ppData[PLUGIN_DATA_LOGPRINTF];
 
-    logprintf("  MD5 plugin v1.1.1 loaded");
+    logprintf("  MD5 v%s by BJIADOKC loaded", PLUGIN_VERSION);
 
-    return true;
+    return 1;
 }
 
 
 
 PLUGIN_EXPORT void PLUGIN_CALL Unload()
 {
-    logprintf("  MD5 plugin v1.1.1 unloaded");
+    logprintf("  MD5 v%s by BJIADOKC unloaded", PLUGIN_VERSION);
 }
 
 

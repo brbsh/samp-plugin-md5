@@ -18,6 +18,8 @@
 
 
 
+#define PLUGIN_VERSION "1.2"
+
 #define arguments(n) \
 	(params[0] == (n << 2))
 
